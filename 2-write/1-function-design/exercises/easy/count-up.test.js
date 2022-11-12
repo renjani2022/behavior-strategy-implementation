@@ -11,7 +11,28 @@
 
 // -------- your solutions --------
 
-for (const solution of [secretSolution]) {
+
+function countUp(startNum = 0) {
+  let arr = []
+
+  if (typeof(startNum) !== "number") {
+    throw new TypeError("it is not number");
+  }
+
+  if (startNum < 0) {
+    throw new Error();
+  }
+
+  for(let i = 0; i <= startNum; i++ ){
+    arr.push(i)
+  }
+  return arr
+}
+
+console.log(countUp(5));
+
+
+for (const solution of [secretSolution, countUp]) {
   // the main test suite for the function
   describe(solution.name + ': counts up from 0', () => {
     it('default parameter is 0 -> [0]', () => {
@@ -25,6 +46,21 @@ for (const solution of [secretSolution]) {
       expect(solution(1)).toEqual([0, 1]);
     });
     // write at least 5 more tests ...
+        it('2-> [0, 1, 2]', () => {
+      expect(solution(2)).toEqual([0, 1, 2]);
+    });
+    it('4 -> [0, 1, 2, 3, 4]', () => {
+      expect(solution(4)).toEqual([0, 1, 2, 3, 4]);
+    });
+    it('6 -> [0, 1, 2, 3, 4, 5, 6]', () => {
+      expect(solution(6)).toEqual([0, 1, 2, 3, 4, 5, 6]);
+    });
+    it('Error ', () => {
+      expect(() => solution(-1)).toThrow(Error);
+    });
+    it('TypeError', () => {
+      expect(() => solution("string")).toThrow(TypeError);
+    });
   });
 }
 

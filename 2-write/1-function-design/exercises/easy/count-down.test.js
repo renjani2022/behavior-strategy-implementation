@@ -11,7 +11,39 @@
 
 // -------- your solutions --------
 
-for (const solution of [secretSolution]) {
+function countDown(start=0) {
+let arr = [];
+
+if (typeof(start) !== "number") {
+throw new TypeError("it is not number");
+}
+  
+if (start < 0) {
+throw new Error();
+}
+
+for (let i = 0; i <= start; i++){
+arr.unshift(i);
+}
+return arr;
+}
+
+
+/**
+ * other solution: 
+ * function countDown(start = 0) {
+ * let number = []
+ * for(let i = start; i >= 0; i-- ){
+ * number.push(i)  
+ * }
+ * return number
+ * }
+*/
+
+console.log(countDown(5));
+
+
+for (const solution of [secretSolution,countDown]) {
   // the main test suite for the function
   describe(solution.name + ': counts down to 0', () => {
     it('default parameter is 0 -> [0]', () => {
@@ -23,9 +55,29 @@ for (const solution of [secretSolution]) {
     it('1 -> [1, 0]', () => {
       expect(solution(1)).toEqual([1, 0]);
     });
+
+      
     // write at least 5 more tests ...
+    it('6 -> [6, 5, 4, 3, 2, 1, 0]', () => {
+      expect(solution(2)).toEqual([2, 1, 0]);
+    });
+
+    it('8 -> [8, 7, 6, 5, 4, 3, 2, 1, 0]', () => {
+      expect(solution(4)).toEqual([4, 3, 2, 1, 0]);
+    });
+    it('3-> [3, 2, 1, 0]', () => {
+      expect(solution(2)).toEqual([2, 1, 0]);
+    });
+    it('TypeError', () => {
+      expect(() => solution("string")).toThrow(TypeError);
+    });
+    it('Error', () => {
+      expect(() => solution(-1)).toThrow(Error);
+    });
   });
 }
+
+
 
 // minified solution for testing your tests
 // prettier-ignore
